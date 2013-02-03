@@ -407,6 +407,7 @@ $db->connect();
 $result = $db->delete("users","id=27");
  
 if ($result) echo "delete ok";
+
 else echo "delete ko";
  
 $db->close();
