@@ -6,12 +6,12 @@ phpgotomysql2 is a PHP class that allows you to interact with a MySQL database a
 include("phpgotomysql.php");
  
 $config = array(
-  'db_driver'=>'mysqli',
-	'db_host'=>'localhost',
-	'db_user'=>'root',
-	'db_pass'=>'password',
-	'db_name'=>'test',
-	'charset'=>'utf8'
+  'db_driver'=>'mysqli',<br />
+  'db_host'=>'localhost',<br />
+  'db_user'=>'root',<br />
+  'db_pass'=>'password',<br />
+  'db_name'=>'test',<br />
+  'charset'=>'utf8'<br />
 );
  
 $db = new phpgotomysql($config);
@@ -19,17 +19,17 @@ $db = new phpgotomysql($config);
 if ($db->connect()) echo "connect ok";
 else echo "connect ko!";
 
-Generic Query
+<strong>Generic Query</strong>
 
 include("phpgotomysql.php");
  
 $config = array(
-  'db_driver'=>'mysqli',
-  'db_host'=>'localhost',
-	'db_user'=>'root',
-	'db_pass'=>'password',
-	'db_name'=>'test',
-	'charset'=>'utf8'
+  'db_driver'=>'mysqli',<br />
+  'db_host'=>'localhost',<br />
+  'db_user'=>'root',<br />
+  'db_pass'=>'password',<br />
+  'db_name'=>'test',<br />
+  'charset'=>'utf8'<br />
 );
  
 $db = new phpgotomysql($config);
