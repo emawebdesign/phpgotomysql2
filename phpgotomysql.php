@@ -18,9 +18,9 @@
   
 	private $db_driver = 'mysqli';
 	private $db_host = 'localhost';
-    private $db_user = 'root';
-    private $db_pass = '';
-    private $db_name = '';
+        private $db_user = 'root';
+        private $db_pass = '';
+        private $db_name = '';
 	private $charset = 'utf8';
 	
 	private $connection = false;
@@ -37,11 +37,11 @@
 	
 	
 	/*
-     * Costruttore, permette di settare i parametri di connessione al database
+         * Costruttore, permette di settare i parametri di connessione al database
 	 * @param params, un array associativo contenente i parametri di connessione: 
 	 *        driver, host, username, password, nome del database e set di caratteri.
 	 *        Come driver si può scegliere mysql o mysqli.
-     */
+         */
 	function __construct($params = array()) {
 		
 		if (isset($params["db_driver"])) $this->db_driver = $params["db_driver"];
@@ -57,11 +57,11 @@
 	
 	
 	/*
-     * Questo metodo permette di settare i parametri di connessione al database
+         * Questo metodo permette di settare i parametri di connessione al database
 	 * @param params, un array associativo contenente i parametri di connessione: 
 	 *        driver, host, username, password, nome del database e set di caratteri.
 	 *        Come driver si può scegliere mysql o mysqli.
-     */
+         */
 	public function getParams($params = array()) {
 		
 		if (isset($params["db_driver"])) $this->db_driver = $params["db_driver"];
@@ -77,9 +77,9 @@
 	
 	
 	/*
-     * Questo metodo esegue la connessione al database
+         * Questo metodo esegue la connessione al database
 	 * @return ritorna true se la connessione è avvenuta altrimenti false
-     */
+         */
 	public function connect() {
 		
 		if (!$this->connection) {
@@ -115,9 +115,9 @@
 	
 	
 	/*
-     * Questo metodo esegue la disconnessione al database
+         * Questo metodo esegue la disconnessione al database
 	 * @return ritorna true se la connessione è stata chiusa altrimenti false
-     */
+         */
 	 public function close() {
 		 
 		 if ($this->connection) {
@@ -154,10 +154,10 @@
 	 
 	 
 	 /*
-     * Questo metodo esegue una query SQL
-	 * @param sql, la query SQL da eseguire
-	 * @return ritorna true se la query è stata eseguita altrimenti false
-     */
+          * Questo metodo esegue una query SQL
+	  * @param sql, la query SQL da eseguire
+	  * @return ritorna true se la query è stata eseguita altrimenti false
+          */
 	 public function query($sql='') {
 		 
 		 if ($this->db_driver=="mysql") $result = mysql_query($sql);
@@ -183,9 +183,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce l'ultima query eseguita
-	 * @return ritorna l'ultima query eseguita
-     */
+          * Questo metodo restituisce l'ultima query eseguita
+	  * @return ritorna l'ultima query eseguita
+          */
 	 public function lastQuery() {
 		
 		return $this->lastSql;
@@ -196,9 +196,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce l'ultimo ID generato da una query INSERT
-	 * @return ritorna l'ID generato dalla query INSERT
-     */
+          * Questo metodo restituisce l'ultimo ID generato da una query INSERT
+	  * @return ritorna l'ID generato dalla query INSERT
+          */
 	 public function lastId() {
 		 
 		 if ($this->db_driver=="mysql") return mysql_insert_id($this->connection);
@@ -210,9 +210,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce il numero di record interessati da una query SELECT
-	 * @return ritorna il numero di record
-     */
+          * Questo metodo restituisce il numero di record interessati da una query SELECT
+	  * @return ritorna il numero di record
+          */
 	 public function numRows() {
 		 
 		 if ($this->db_driver=="mysql") return mysql_num_rows($this->result);
@@ -224,9 +224,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce il numero di record interessati da una query INSERT, UPDATE o DELETE
-	 * @return ritorna il numero di record
-     */
+          * Questo metodo restituisce il numero di record interessati da una query INSERT, UPDATE o DELETE
+	  * @return ritorna il numero di record
+          */
 	 public function affectedRows() {
 		 
 		 if ($this->db_driver=="mysql") return mysql_affected_rows();
@@ -238,9 +238,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce il messaggio di errore generato da una query fallita
-	 * @return ritorna il messaggio di errore
-     */
+          * Questo metodo restituisce il messaggio di errore generato da una query fallita
+	  * @return ritorna il messaggio di errore
+          */
 	 public function error() {
 		 
 		 return $this->errorMessage;
@@ -251,10 +251,10 @@
 	 
 	 
 	 /*
-     * Questo metodo verifica se una tabella esiste nel database
-	 * @param table, il nome della tabella
-	 * @return ritorna true se la tabella esiste altrimenti false
-     */
+          * Questo metodo verifica se una tabella esiste nel database
+  	  * @param table, il nome della tabella
+	  * @return ritorna true se la tabella esiste altrimenti false
+          */
 	 public function tableExsist($table='') {
 		 
 		 if ($this->db_driver=="mysql") $exsist = mysql_query('SHOW TABLES FROM '.$this->db_name.' LIKE "'.$table.'"');
@@ -287,36 +287,36 @@
 	 
 	 
 	 /*
-     * Questo metodo esegue una query di tipo SELECT
-	 * @param params, un array associativo contenente i parametri di configurazione della query:
-	 * @param $params["table"], la tabella
-	 * @param $params["fields"], i campi da estrarre
-	 * @param $params["where"], la condizione da rispettare
-	 * @param $params["order"], l'ordinamento da rispettare
-	 * @param $params["per_page"], il numero di record per pagina
-	 * @param $params["page"], la pagina da mostrare in una paginazione di risultati
-	 * @param $params["join"], è un'array associativo (un'array di array) che serve a 
-	 *        stabilire relazioni tra tabelle di tipo uno a molti, i valori:
-	 * @param $params["join"]["type"], indica il tipo di join da eseguire (inner, left, right)
-	 * @param $params["join"]["table"], indica la tabella con cui stabilire la relazione
-	 * @param $params["join"]["key"], indica la chiave di partenza della relazione
-	 * @param $params["join"]["foreignKey"], indica la chiave esterna della relazione
-	 * @param $params["hasMany"], è un'array associativo (un'array di array) che serve a 
-	 *        stabilire relazioni tra tabelle di tipo molti a molti:
-	 * @param $params["hasMany"]["table"], indica la tabella con cui stabilire la relazione
-	 * @param $params["hasMany"]["joinTable"], indica la tabella di collegamento tra le due 
-	 *        tabelle relazionate
-	 * @param $params["hasMany"]["key1"], indica la chiave di partenza della prima 
-	 *        tabella relazionata
-	 * @param $params["hasMany"]["foreignKey1"], indica la chiave esterna della prima 
-	 *        tabella relazionata nella tabella di collegamento
-	 * @param $params["hasMany"]["key2"], indica la chiave di partenza della seconda 
-	 *        tabella relazionata
-	 * @param $params["hasMany"]["foreignKey2"], indica la chiave esterna della seconda 
-	 *        tabella relazionata nella tabella di collegamento
-	 * @return ritorna un'array associativo contenente i risultati se la query è stata 
-	 *         eseguita correttamente altrimenti false
-     */
+          * Questo metodo esegue una query di tipo SELECT
+	  * @param params, un array associativo contenente i parametri di configurazione della query:
+	  * @param $params["table"], la tabella
+	  * @param $params["fields"], i campi da estrarre
+	  * @param $params["where"], la condizione da rispettare
+	  * @param $params["order"], l'ordinamento da rispettare
+	  * @param $params["per_page"], il numero di record per pagina
+	  * @param $params["page"], la pagina da mostrare in una paginazione di risultati
+	  * @param $params["join"], è un'array associativo (un'array di array) che serve a 
+	  *        stabilire relazioni tra tabelle di tipo uno a molti, i valori:
+	  * @param $params["join"]["type"], indica il tipo di join da eseguire (inner, left, right)
+	  * @param $params["join"]["table"], indica la tabella con cui stabilire la relazione
+	  * @param $params["join"]["key"], indica la chiave di partenza della relazione
+	  * @param $params["join"]["foreignKey"], indica la chiave esterna della relazione
+	  * @param $params["hasMany"], è un'array associativo (un'array di array) che serve a 
+	  *        stabilire relazioni tra tabelle di tipo molti a molti:
+	  * @param $params["hasMany"]["table"], indica la tabella con cui stabilire la relazione
+	  * @param $params["hasMany"]["joinTable"], indica la tabella di collegamento tra le due 
+	  *        tabelle relazionate
+	  * @param $params["hasMany"]["key1"], indica la chiave di partenza della prima 
+	  *        tabella relazionata
+	  * @param $params["hasMany"]["foreignKey1"], indica la chiave esterna della prima 
+	  *        tabella relazionata nella tabella di collegamento
+	  * @param $params["hasMany"]["key2"], indica la chiave di partenza della seconda 
+	  *        tabella relazionata
+	  * @param $params["hasMany"]["foreignKey2"], indica la chiave esterna della seconda 
+	  *        tabella relazionata nella tabella di collegamento
+	  * @return ritorna un'array associativo contenente i risultati se la query è stata 
+	  *         eseguita correttamente altrimenti false
+          */
 	 public function select($params = array()) {
 		
 		$table = "";
@@ -483,10 +483,10 @@
 	 
 	 
 	 /*
-     * Questo metodo permette di salvare i parametri in querystring per non perderli 
-	 * cliccando sui link di una paginazione di dati
-	 * @param params, i parametri da salvare scritti nella forma &param1=a&param2=b&param3=c
-     */
+          * Questo metodo permette di salvare i parametri in querystring per non perderli 
+	  * cliccando sui link di una paginazione di dati
+	  * @param params, i parametri da salvare scritti nella forma &param1=a&param2=b&param3=c
+          */
 	 public function setQueryString($params='') {
 		 
 		 $this->querystring = $params;
@@ -497,15 +497,15 @@
 	 
 	 
 	 /*
-     * Questo metodo visualizza una paginazione di dati eseguita con i link "avanti" e "indietro"
-	 * @param params, un array associativo contenente le label da visualizzare per i 
-	 *        link "avanti" e "indietro"
-	 * @param $params["prev"], la label del link "indietro"
-	 * @param $params["next"], la label del link "avanti"
-	 * @param $params["titlePrev"], la label dell'attributo title del link "indietro"
-	 * @param $params["titleNext"], la label dell'attributo title del link "avanti"
-	 * @return ritorna l'HTML contenente i link "avanti" e "indietro"
-     */
+          * Questo metodo visualizza una paginazione di dati eseguita con i link "avanti" e "indietro"
+	  * @param params, un array associativo contenente le label da visualizzare per i 
+	  *        link "avanti" e "indietro"
+	  * @param $params["prev"], la label del link "indietro"
+	  * @param $params["next"], la label del link "avanti"
+	  * @param $params["titlePrev"], la label dell'attributo title del link "indietro"
+	  * @param $params["titleNext"], la label dell'attributo title del link "avanti"
+	  * @return ritorna l'HTML contenente i link "avanti" e "indietro"
+          */
 	 public function nextPagination($params = array()) {
 		 
 		 $labelPrev = "Indietro";
@@ -548,12 +548,12 @@
 	 
 	 
 	 /*
-     * Questo metodo visualizza una paginazione di dati eseguita con i link 1,2,3 ecc.
-	 * @param title, contiene il testo dell'attributo title dei link
-	 * @param nearPages, il numero di pagine "contigue" da visualizzare
-	 * @return ritorna una lista puntata HTML con ID uguale a "pagination" 
-	 *         contenente i link 1,2,3 ecc.
-     */
+          * Questo metodo visualizza una paginazione di dati eseguita con i link 1,2,3 ecc.
+	  * @param title, contiene il testo dell'attributo title dei link
+	  * @param nearPages, il numero di pagine "contigue" da visualizzare
+	  * @return ritorna una lista puntata HTML con ID uguale a "pagination" 
+	  *         contenente i link 1,2,3 ecc.
+          */
 	 public function numberPagination($title='Vai alla pagina numero',$nearPages=5) {
 		 	
 		//Richiamo la funzione che crea i link per la paginazione	
@@ -567,11 +567,11 @@
 	 
 	 
 	 /*
-     * Questo metodo crea il link "non cliccabile" in una paginazione numerica
-	 * @param url, la url corrente
-	 * @param page, la pagina a cui rimandare
-	 * @return ritorna il link "non cliccabile"
-     */
+          * Questo metodo crea il link "non cliccabile" in una paginazione numerica
+	  * @param url, la url corrente
+	  * @param page, la pagina a cui rimandare
+	  * @return ritorna il link "non cliccabile"
+          */
 	 function makeUrlPagination($url, $page) {
 		 
 		if (strpos($url,'?') === false) {
@@ -590,13 +590,13 @@
 	
 	
 	/*
-     * Questo metodo crea il link "cliccabile" in una paginazione numerica
+         * Questo metodo crea il link "cliccabile" in una paginazione numerica
 	 * @param url, la url corrente
 	 * @param currentPage, la pagina corrente
 	 * @param page, la pagina a cui rimandare
 	 * @param title, contiene il testo dell'attributo title dei link
 	 * @return ritorna la url "cliccabile"
-     */
+         */
 	function makeLinkPagination($url, $currentPage, $page, $title) {
 		
 		if ($currentPage == $page) {
@@ -615,14 +615,14 @@
 	 
 	 
 	 /*
-     * Questo metodo crea i link per la paginazione numerica
-	 * @param totPages, il numero totale di pagine
-	 * @param url, la url corrente
-	 * @param currentPage, la pagina corrente
-	 * @param nearPages, il numero di pagine "contigue" da visualizzare
-	 * @param title, contiene il testo dell'attributo title dei link
-	 * @return ritorna i link per la paginazione numerica
-     */
+          * Questo metodo crea i link per la paginazione numerica
+	  * @param totPages, il numero totale di pagine
+	  * @param url, la url corrente
+	  * @param currentPage, la pagina corrente
+	  * @param nearPages, il numero di pagine "contigue" da visualizzare
+	  * @param title, contiene il testo dell'attributo title dei link
+	  * @return ritorna i link per la paginazione numerica
+          */
 	 function makePagination($totPages, $url, $currentPage, $nearPages, $title) {
 		
 		$pagination = "";
@@ -692,9 +692,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce il numero totale di pagine in una paginazione di dati
-	 * @return ritorna il numero totale di pagine in una paginazione di dati
-     */
+          * Questo metodo restituisce il numero totale di pagine in una paginazione di dati
+	  * @return ritorna il numero totale di pagine in una paginazione di dati
+          */
 	 public function totPages() {
 		
 		return($this->tot_pages);
@@ -705,9 +705,9 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce la pagina corrente in una paginazione di dati
-	 * @return ritorna la pagina corrente in una paginazione di dati
-     */
+          * Questo metodo restituisce la pagina corrente in una paginazione di dati
+	  * @return ritorna la pagina corrente in una paginazione di dati
+          */
 	 public function currentPage() {
 		
 		return($this->current_page);
@@ -718,13 +718,13 @@
 	 
 	 
 	 /*
-     * Questo metodo restituisce il valore di un campo di un record in base a una condizione
-	 * @param params, un array associativo contenente le informazioni per estrarre il valore:
-	 * @param $params["table"], la tabella in cui leggere
-	 * @param $params["field"], il campo di cui si vuole leggere il valore
-	 * @param $params["condition"], la condizione da rispettare
-	 * @return ritorna il valore del campo
-     */
+          * Questo metodo restituisce il valore di un campo di un record in base a una condizione
+	  * @param params, un array associativo contenente le informazioni per estrarre il valore:
+	  * @param $params["table"], la tabella in cui leggere
+	  * @param $params["field"], il campo di cui si vuole leggere il valore
+	  * @param $params["condition"], la condizione da rispettare
+	  * @return ritorna il valore del campo
+          */
 	 public function read($params = array()) {
 		 
 		 if (isset($params["table"])) $table = $params["table"];
@@ -761,11 +761,11 @@
 	 
 	 
 	 /*
-     * Questo metodo ripulisce le variabili che dovranno essere memorizzate nel 
-	 * database tramite query INSERT/UPDATE in modo da prevenire attacchi di tipo SQL Injection
-	 * @param variable, la variabile da ripulire
-	 * @return ritorna la variabile ripulita
-     */
+          * Questo metodo ripulisce le variabili che dovranno essere memorizzate nel 
+	  * database tramite query INSERT/UPDATE in modo da prevenire attacchi di tipo SQL Injection
+	  * @param variable, la variabile da ripulire
+	  * @return ritorna la variabile ripulita
+          */
 	 function cleanVar($variable='') {
 		 
 		 $variable = stripslashes($variable);
@@ -783,13 +783,13 @@
 	 
 	 
 	 /*
-     * Questo metodo esegue una query di tipo INSERT
-	 * @param table, la tabella in cui memorizzare le informazioni
-	 * @param params, un array associativo contenente le informazioni da memorizzare 
-	 *        nel database. Per ogni elemento dell'array, la chiave, indica il nome 
-	 *        del campo mentre, il contenuto, il valore da memorizzare
-	 * @return ritorna true se la query è stata eseguita altrimenti false
-     */
+          * Questo metodo esegue una query di tipo INSERT
+	  * @param table, la tabella in cui memorizzare le informazioni
+	  * @param params, un array associativo contenente le informazioni da memorizzare 
+	  *        nel database. Per ogni elemento dell'array, la chiave, indica il nome 
+	  *        del campo mentre, il contenuto, il valore da memorizzare
+	  * @return ritorna true se la query è stata eseguita altrimenti false
+          */
 	 public function insert($table='',$params = array()) {
 		 
 		 $keys = array_keys($params);
@@ -835,14 +835,14 @@
 	 
 	 
 	 /*
-     * Questo metodo esegue una query di tipo UPDATE
-	 * @param table, la tabella in cui modificare le informazioni
-	 * @param params, un array associativo contenente le informazioni da modificare 
-	 *        nel database. Per ogni elemento dell'array, la chiave, indica il 
-	 *        nome del campo mentre, il contenuto, il valore da modificare
-	 * @param where, la condizione da rispettare
-	 * @return ritorna true se la query è stata eseguita altrimenti false
-     */
+          * Questo metodo esegue una query di tipo UPDATE
+	  * @param table, la tabella in cui modificare le informazioni
+	  * @param params, un array associativo contenente le informazioni da modificare 
+	  *        nel database. Per ogni elemento dell'array, la chiave, indica il 
+	  *        nome del campo mentre, il contenuto, il valore da modificare
+	  * @param where, la condizione da rispettare
+	  * @return ritorna true se la query è stata eseguita altrimenti false
+          */
 	 public function update($table='',$params = array(),$where=NULL) {
 		 
 		 if ($where!=NULL) {
@@ -889,11 +889,11 @@
 	 
 	 
 	 /*
-     * Questo metodo esegue una query di tipo DELETE
-	 * @param table, la tabella in cui eliminare le informazioni
-	 * @param where, la condizione da rispettare
-	 * @return ritorna true se la query è stata eseguita altrimenti false
-     */
+          * Questo metodo esegue una query di tipo DELETE
+	  * @param table, la tabella in cui eliminare le informazioni
+	  * @param where, la condizione da rispettare
+	  * @return ritorna true se la query è stata eseguita altrimenti false
+          */
 	 public function delete($table='',$where=NULL) {
 		 
 		 if ($where!=NULL) {
@@ -924,13 +924,13 @@
 	 
 	 
 	 /*
-     * Questo metodo conta il numero di record che corrispondono a una query
-	 * @param params, un array associativo contenente i parametri di configurazione della query:
-	 * @param $params["table"], la tabella
-	 * @param $params["field"], il campo
-	 * @param $params["where"], la condizione da rispettare
-	 * @return ritorna il numero di record altrimenti false se la query fallisce
-     */
+          * Questo metodo conta il numero di record che corrispondono a una query
+	  * @param params, un array associativo contenente i parametri di configurazione della query:
+	  * @param $params["table"], la tabella
+	  * @param $params["field"], il campo
+	  * @param $params["where"], la condizione da rispettare
+	  * @return ritorna il numero di record altrimenti false se la query fallisce
+          */
 	 function countRow($params = array()) {
 		 
 		 $table = "";
