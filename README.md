@@ -3,8 +3,6 @@ phpgotomysql2
 
 phpgotomysql2 is a PHP class that allows you to interact with a MySQL database and execute query and CRUD operations.
 
-This is a italian PHPclass :)
-
 <strong>Condizioni di utilizzo (Terms of use)</strong>
 
 Se scarichi e utilizzi la classe significa che hai letto e dato il tuo assenso alle seguenti condizioni:
